@@ -1,0 +1,9 @@
+{
+	"auth": {
+		"blogaloo3768adb0": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	}
+}

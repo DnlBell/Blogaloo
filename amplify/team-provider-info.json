@@ -1,0 +1,19 @@
+{
+    "bloo": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-blogaloo-bloo-191331-authRole",
+            "UnauthRoleArn": "arn:aws:iam::760224853305:role/amplify-blogaloo-bloo-191331-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::760224853305:role/amplify-blogaloo-bloo-191331-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "amplify-blogaloo-bloo-191331-deployment",
+            "UnauthRoleName": "amplify-blogaloo-bloo-191331-unauthRole",
+            "StackName": "amplify-blogaloo-bloo-191331",
+            "StackId": "arn:aws:cloudformation:us-west-2:760224853305:stack/amplify-blogaloo-bloo-191331/674fce80-04fa-11ea-a28d-0a922c2d05da"
+        },
+        "categories": {
+            "auth": {
+                "blogaloo3768adb0": {}
+            }
+        }
+    }
+}
