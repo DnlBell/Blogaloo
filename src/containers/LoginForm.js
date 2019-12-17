@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import Login from './Login';
-import Register from './Register';
+import Login from '../components/login/Login';
+import Register from '../components/login/Register';
+import Authenticate from '../components/login/Authenticate';
 
 export class LoginForm extends Component {
     state = {
@@ -14,7 +15,6 @@ export class LoginForm extends Component {
 
     //move between login to register
     toRegister = () => {
-        const { step } = this.state;
         this.setState({
             step: 2
         });
@@ -22,14 +22,12 @@ export class LoginForm extends Component {
 
     //move between register and login
     toLogin = () => {
-        const { step } = this.state;
         this.setState({
             step: 1
         });
     }
 
     toAuthenticate = () => {
-        const { step } = this.state;
         this.setState({
             step: 3
         });
@@ -45,11 +43,21 @@ export class LoginForm extends Component {
         const values = { username, password, confirmPassword, email, authKey }
 
         switch(step) {
+            default: 
+                return (
+                        <Login
+                            toRegister = {this.toRegister}
+                            handleChange = {this.handleChange}
+                            toAuthenticate = {this.toAuthenticate}
+                            values= {values}
+                        />
+                ) 
             case 1:
                 return (
                         <Login
                             toRegister = {this.toRegister}
                             handleChange = {this.handleChange}
+                            toAuthenticate = {this.toAuthenticate}
                             values= {values}
                         />
                 )
@@ -57,13 +65,18 @@ export class LoginForm extends Component {
                 return (
                         <Register
                             toLogin = {this.toLogin}
+                            toAuthenticate = {this.toAuthenticate}
                             handleChange = {this.handleChange}
                             values = {values}
                         />
                     )
             case 3:
-                return <h1>Authenticate</h1>
-            
+                return (
+                        <Authenticate 
+                            handleChange = {this.handleChange}
+                            values = {values}
+                        />
+                    )
         }
     }
 }

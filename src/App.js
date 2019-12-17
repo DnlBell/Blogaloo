@@ -1,11 +1,10 @@
 import React from 'react';
-import './App.css';
-import LoginForm from './components/login_register/LoginForm'
+import Login from './veiws/Login';
 
 function App() {
   return (
-    <div className="App">
-      <LoginForm/>
+    <div>
+      <Login/>
     </div>
   );
 }

@@ -51,21 +51,23 @@ export class Register extends Component {
                         style={styles.input}
                     />
                     <br/>
-                    <Button 
-                        color="primary"
-                        variant="contained"
-                        style={styles.button}
-                        >
-                        Submit
-                    </Button>
-                    <Button
-                        color="secondary"
-                        variant="contained"
-                        style={styles.button}
-                        onClick={this.toLogin}
-                        >
-                        Return to Login
-                    </Button>
+                    <div style={styles.buttonRow}>
+                        <Button
+                            color="secondary"
+                            variant="contained"
+                            style={styles.button}
+                            onClick={this.toLogin}
+                            >
+                            Login
+                        </Button>
+                        <Button 
+                            color="primary"
+                            variant="contained"
+                            style={styles.button}
+                            >
+                            Submit
+                        </Button>
+                    </div>
                 </React.Fragment>
             </MuiThemeProvider>
         )
@@ -75,11 +77,14 @@ export class Register extends Component {
 const styles = {
     button: {
         margin: 8,
-        marginTop: 16
+        marginTop: 12
     },
     input : {
         margin: 8,
-        marginTop: 16
+        marginTop: 8
+    },
+    buttonRow: {
+        flexDirection: 'row'
     }
 }
 
