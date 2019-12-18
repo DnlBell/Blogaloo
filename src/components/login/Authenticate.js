@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import styles from './Styles.js';
 
 export class Authenticate extends Component {
     render() {
@@ -30,17 +31,6 @@ export class Authenticate extends Component {
                 </React.Fragment>
             </MuiThemeProvider>
         )
-    }
-}
-
-const styles = {
-    button: {
-        margin: 12,
-        marginTop: 8
-    },
-    input : {
-        margin: 8,
-        marginTop: 8
     }
 }
 
