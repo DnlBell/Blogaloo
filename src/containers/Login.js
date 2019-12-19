@@ -4,8 +4,10 @@ import Register from '../components/login/Register';
 import Authenticate from '../components/login/Authenticate';
 import NewPassword from '../components/login/NewPassword';
 import { Auth } from "aws-amplify";
+import {connect} from 'react-redux';
+import * as actionCreators from '../actions/index.js'
 
-export class LoginForm extends Component {
+class LoginForm extends Component {
 
     constructor(props) {
         super(props);
@@ -21,6 +23,7 @@ export class LoginForm extends Component {
         }
         this.handleLogin = this.handleLogin.bind(this);
         this.handleNewPassword = this.handleNewPassword.bind(this);
+        this.handleSignUp = this.handleSignUp.bind(this);
     }
 
     //move between login to register
@@ -67,7 +70,9 @@ export class LoginForm extends Component {
                 });
                 this.toNewPassword();               
             }
-            alert(JSON.stringify(user));
+            alert(JSON.stringify(user.signInUserSession.idToken.jwtToken));
+            this.props.updateUser(user);
+            localStorage.setItem('token', user.signInUserSession.idToken.jwtToken);
         } catch (e) {
             this.setState({
                 errorMessage: e.message
@@ -79,12 +84,12 @@ export class LoginForm extends Component {
         try {
             const loggedUser = await Auth.completeNewPassword(
                 this.state.user,
-                this.state.password
+                this.state.password,
             )
             this.setState({
                 user: loggedUser
             })
-            alert(loggedUser);
+            alert(JSON.stringify(loggedUser));
         } catch (e) {
             this.setState({
                 errorMessage: e.message
@@ -93,15 +98,20 @@ export class LoginForm extends Component {
     }
 
     async handleSignUp() {
+        const email = this.state.email;
         const signUpAttributes = {
             username: this.state.username,
-            password: this.state.password
+            password: this.state.password,
+            attributes: {
+                email
+            }
         }
         try {
             const newUser = await Auth.signUp(signUpAttributes);
             this.setState({
                 user:newUser
             })
+            alert(JSON.stringify(this.state.user));
         } catch (e) {
             this.setState({
                 errorMessage: e.message
@@ -181,5 +191,9 @@ const styles = {
     }
   }
 
-export default LoginForm
+  const mapStateToProps = (state)=>{
+    return state;
+  };
+  
+  export default connect (mapStateToProps, actionCreators)(LoginForm);
 
