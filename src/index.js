@@ -4,13 +4,13 @@ import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import Amplify from 'aws-amplify';
-//import config from './aws-exports';
+import config from './aws-exports';
 import {createStore, applyMiddleware, compose} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import reducers from './reducers/index.js'
 
-//Amplify.configure(config);
+Amplify.configure(config);
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

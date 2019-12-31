@@ -1,6 +1,6 @@
 let defaultState={
     user:{
-        isLoggedIn: true,
+        isLoggedIn: false,
         payload: {}
     }
 }
