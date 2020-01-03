@@ -10,8 +10,6 @@ import Post from './containers/Post';
 
 function App(props) {
 
-  let bacon = '';
-
   const isLoggedIn = props.isLoggedIn()
 
   const PrivateRoute = ({ component: Component, ...rest}) => (

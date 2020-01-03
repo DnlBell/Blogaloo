@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../actions/index.js';
+import { Auth } from "aws-amplify";
 
 
 const useStyles = makeStyles(theme => ({
