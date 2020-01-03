@@ -4,8 +4,9 @@ import Register from '../components/login/Register';
 import Authenticate from '../components/login/Authenticate';
 import NewPassword from '../components/login/NewPassword';
 import { Auth } from "aws-amplify";
-import {connect} from 'react-redux';
-import * as actionCreators from '../actions/index.js'
+import { connect } from 'react-redux';
+import * as actionCreators from '../actions/index.js';
+import history from '../history';
 
 class LoginForm extends Component {
 
@@ -73,6 +74,7 @@ class LoginForm extends Component {
             alert(JSON.stringify(user.signInUserSession.idToken.jwtToken));
             this.props.updateUser(user);
             localStorage.setItem('token', user.signInUserSession.idToken.jwtToken);
+            history.push('/');
         } catch (e) {
             this.setState({
                 errorMessage: e.message

@@ -7,3 +7,11 @@ export function updateUser(user){
         }
     }
 }
+
+export function isLoggedIn() {
+    return(dispatch, getState) => {
+        const state = getState();
+        const isLoggedIn = state.user.isLoggedIn;
+        return isLoggedIn;
+    }
+}
