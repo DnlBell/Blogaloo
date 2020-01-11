@@ -7,7 +7,6 @@ import { Auth } from "aws-amplify";
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions/index.js';
 import history from '../history';
-
 class LoginForm extends Component {
 
     constructor(props) {
@@ -71,7 +70,6 @@ class LoginForm extends Component {
                 });
                 this.toNewPassword();               
             }
-            alert(JSON.stringify(user.signInUserSession.idToken.jwtToken));
             this.props.updateUser(user);
             localStorage.setItem('token', user.signInUserSession.idToken.jwtToken);
             history.push('/');
@@ -105,7 +103,7 @@ class LoginForm extends Component {
             username: this.state.username,
             password: this.state.password,
             attributes: {
-                email
+                email:email
             }
         }
         try {
@@ -120,7 +118,6 @@ class LoginForm extends Component {
             });
         }
     }
-
 
     render() {
         const{ step } = this.state;
@@ -191,11 +188,11 @@ const styles = {
       justifyContent: 'center',
       flexDirection: 'column'
     }
-  }
+}
 
-  const mapStateToProps = (state)=>{
+const mapStateToProps = (state)=>{
     return state;
-  };
+};
   
   export default connect (mapStateToProps, actionCreators)(LoginForm);
 

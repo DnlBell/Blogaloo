@@ -11,7 +11,13 @@ const mainReducer=(state=defaultState,action)=>{
             ...state,
             user:action.user
         } 
-    } else {
+    } else if (action.type==="LOGOUT_USER"){
+        return{
+            ...state,
+            user:action.user
+        }
+    }
+    else{
         return {
             ...state
         }

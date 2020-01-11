@@ -12,8 +12,6 @@ import Button from '@material-ui/core/Button';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../actions/index.js';
-import { Auth } from "aws-amplify";
-
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -39,6 +37,12 @@ function MenuAppBar(props) {
     const handleClose = () => {
       setAnchorEl(null);
     };
+
+    const handleLogout = (event) => {
+      event.preventDefault();
+      props.logout();
+      handleClose();
+    }
   
     return (
       <div className={classes.root}>
@@ -78,10 +82,17 @@ function MenuAppBar(props) {
                 >
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
                   <MenuItem onClick={handleClose}>My account</MenuItem>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </Menu>
               </div>
-            )) || <Button component={Link} to={'/Login'}>Login</Button>}
+              )) || 
+              <Button 
+              variant="contained" 
+              component={Link} 
+              to={'/Login'} 
+              color="secondary">
+                Login
+              </Button>}
           </Toolbar>
         </AppBar>
       </div>
