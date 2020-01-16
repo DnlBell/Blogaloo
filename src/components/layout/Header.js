@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -9,26 +9,18 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Button from '@material-ui/core/Button';
+import Drawer from '@material-ui/core/Drawer';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../actions/index.js';
+import SideBarNav from './SideBarNav.js';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-  }));
-  
 function MenuAppBar(props) {
-    const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
+    const [state, setState] = React.useState({
+      drawerOpen: false
+    });
   
     const handleMenu = event => {
       setAnchorEl(event.currentTarget);
@@ -38,6 +30,14 @@ function MenuAppBar(props) {
       setAnchorEl(null);
     };
 
+    const toggleDrawer = (drawerUpdate) => (event) => {
+
+      if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+        return;
+      }
+      setState({ ...state, drawerOpen: drawerUpdate })
+    };
+
     const handleLogout = (event) => {
       event.preventDefault();
       props.logout();
@@ -45,16 +45,23 @@ function MenuAppBar(props) {
     }
   
     return (
-      <div className={classes.root}>
+      <div >
         <AppBar position="static">
           <Toolbar>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <IconButton edge="start"  color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" className={classes.title}>
-              Blogaloo
-            </Typography>
-            {(props.user.isLoggedIn && (
+            <Drawer open={state.drawerOpen} onClose={toggleDrawer(false)}>
+              <SideBarNav toggleDrawer={toggleDrawer()}/>
+            </Drawer>
+            <div style={{ width: '100%' }}>
+            <Box display="flex" justifyContent="center">
+              <Typography variant="h6" >
+                Blogaloo
+              </Typography>
+            </Box>
+            </div>
+            {(props.isLoggedIn() && (
               <div>
                 <IconButton
                   aria-label="account of current user"
@@ -81,7 +88,6 @@ function MenuAppBar(props) {
                   onClose={handleClose}
                 >
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
                   <MenuItem onClick={handleLogout}>Logout</MenuItem>
                 </Menu>
               </div>
