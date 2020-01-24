@@ -5,5 +5,23 @@
 			"providerPlugin": "awscloudformation",
 			"dependsOn": []
 		}
-	}
+	},
+	"api": {
+		"blogaloo": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [],
+					"defaultAuthentication": {
+						"authenticationType": "AMAZON_COGNITO_USER_POOLS",
+						"userPoolConfig": {
+							"userPoolId": "authblogaloo3768adb0"
+						}
+					}
+				}
+			}
+		}
+	},
+	"analytics": {}
 }

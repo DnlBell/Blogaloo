@@ -1,0 +1,11 @@
+{
+    "AppSyncApiName": "blogaloo",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authblogaloo3768adb0",
+            "Outputs.UserPoolId"
+        ]
+    }
+}
