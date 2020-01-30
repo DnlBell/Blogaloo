@@ -10,7 +10,7 @@ import {Provider} from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import thunk from 'redux-thunk';
 import reducers from './reducers/index.js'
-import { Router } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import history from './history';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';

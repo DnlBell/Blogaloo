@@ -28,7 +28,7 @@ class App extends Component{
         <Switch>
           <Route exact path="/" component = {Home}/>
           <Route path="/login" component = {Login}/>
-          <Route path="/read" component = {Read}/>
+          <Route path="/read/:id" children = {<Read/>}/>
           <PrivateRoute path="/post" component = {Post}/>
         </Switch>
       </div>

@@ -46,7 +46,7 @@ function MenuAppBar(props) {
   
     return (
       <div >
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar>
             <IconButton edge="start"  color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
               <MenuIcon />
