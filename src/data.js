@@ -5,7 +5,7 @@ const postData = [
     id:1,
     img: '../../postDefault.svg',
     title: 'Markdown Test',
-    author: 'Marky markdown',
+    author: 'Marky Markdown',
     content: content,
     tags:["Ebikes","Transit"]
 },
