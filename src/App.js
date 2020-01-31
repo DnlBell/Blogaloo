@@ -21,13 +21,20 @@ class App extends Component{
         : <Redirect to='/login'/>
       )} />
     );
+    const LoginRoute = ({ component: Component, ...rest}) => (
+      <Route {...rest} render={(props) => (
+        this.props.isLoggedIn() === false
+        ? <Component {...props} />
+        : <Redirect to='/'/>
+      )} />
+    );
 
     return (
       <div>
         <Header/>
         <Switch>
           <Route exact path="/" component = {Home}/>
-          <Route path="/login" component = {Login}/>
+          <LoginRoute path="/login" component = {Login}/>
           <Route path="/read/:id" children = {<Read/>}/>
           <PrivateRoute path="/post" component = {Post}/>
         </Switch>

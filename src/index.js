@@ -14,6 +14,7 @@ import { HashRouter as Router } from 'react-router-dom';
 import history from './history';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import ScrollToTop from './helpers/ScrollToTop.js'
 
 Amplify.configure(config);
 
@@ -35,7 +36,9 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <PersistGate loading={null} persistor={persistor}>
-                <App/>
+                <ScrollToTop>
+                    <App/>
+                </ScrollToTop>
             </PersistGate>
         </Router>
     </Provider>,

@@ -56,7 +56,7 @@ function MenuAppBar(props) {
             </Drawer>
             <div style={{ width: '100%' }}>
             <Box display="flex" justifyContent="center">
-              <Typography variant="h6" >
+              <Typography component={Link} to="/" variant="h6" style={{ textDecoration: 'none', color:'white' }}>
                 Blogaloo
               </Typography>
             </Box>

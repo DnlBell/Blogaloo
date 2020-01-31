@@ -9,21 +9,33 @@ function Read() {
     
 
     return(
-        <div style={styles.ReadBox}>
-            <h1>{post.title}</h1>
+        <div style={styles.readBox}>
+            <h1 style={styles.title}>{post.title}</h1>
             <h3>By: {post.author}</h3>
+            <div style={styles.content}>
             <p>{post.content}</p>
+            <p>{post.content}</p>
+            <p>{post.content}</p>
+            </div>
         </div>
     )
 }
 
 const styles = {
-    ReadBox: {
+    readBox: {
         marginTop:60,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
+    },
+    content:{
+        width: "95%",
+        maxWidth:800
+    },
+    title:{
+        width: "95%",
+        textAlign: 'center'
     }
 }
 
