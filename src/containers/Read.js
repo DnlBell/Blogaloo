@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useParams } from "react-router";
 import data from '../data';
-import markdown from '../markdown.js';
+
 
 function Read() {
 
@@ -15,7 +15,7 @@ function Read() {
             <h1 style={styles.title}>{post.title}</h1>
             <h3>By: {post.author}</h3>
             <div style={styles.content}>
-            <ReactMarkdown source={markdown} />
+            <ReactMarkdown source={post.content} />
 
             </div>
         </div>
