@@ -4,7 +4,6 @@ import * as actionCreators from '../actions/index.js';
 import PostList from '../components/home/PostList';
 
 class Home extends Component {
-
     render(){
         if(this.props.user.isLoggedIn){
             return(
@@ -28,7 +27,6 @@ class Home extends Component {
             );
         }
     }
-
 }
 
 const styles = {
