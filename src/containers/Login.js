@@ -7,6 +7,7 @@ import { Auth } from "aws-amplify";
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions/index.js';
 import history from '../history';
+
 class LoginForm extends Component {
 
     constructor(props) {
