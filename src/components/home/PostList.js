@@ -22,6 +22,7 @@ const useStyles = makeStyles( theme => ({
     },
     gridList: {
         width: "95%",
+        maxWidth: 800
 
     },
     root: {
@@ -51,18 +52,18 @@ export default function PostList() {
                             component={Link}
                             to={`read/${item.id}`}
                         >
-                            <CardMedia
-                            className={classes.media}
-                            image={DefaultImage}
-                            />
-                            <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                {item.title}
-                            </Typography>
-                            <Typography variant="body2" color="textSecondary" component="p">
-                                By: {item.author}
-                            </Typography>
-                            </CardContent>
+                        <CardMedia
+                        className={classes.media}
+                        image={DefaultImage}
+                        />
+                        <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {item.title}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            By: {item.author}
+                        </Typography>
+                        </CardContent>
                         </CardActionArea>
                 </GridListTile>
                 )
