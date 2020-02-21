@@ -2,6 +2,9 @@ let defaultState={
     user:{
         isLoggedIn: false,
         payload: {}
+    },
+    blog:{
+        payload: {}
     }
 }
 
@@ -15,6 +18,11 @@ const mainReducer=(state=defaultState,action)=>{
         return{
             ...state,
             user:action.user
+        }
+    } else if (action.type==="UPDATE_BLOG"){
+        return{
+            ...state,
+            blog:action.blog
         }
     }
     else{

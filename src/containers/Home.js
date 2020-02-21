@@ -2,8 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions/index.js';
 import PostList from '../components/home/PostList';
+import Amplify, { Analytics, Storage, API, graphqlOperation } from 'aws-amplify';
+import * as queries from '../graphql/queries';
 
 class Home extends Component {
+
+    constructor(props){
+        super(props)
+        this.listQuery = this.listQuery.bind(this);
+    }
+
+    async listQuery() {
+        console.log('listing posts');
+        const allPosts = await API.graphql(graphqlOperation(queries.listPosts));
+        console.log(JSON.stringify(allPosts));
+    };
+
+    componentDidMount(){
+        this.listQuery();
+    }
+
+
     render(){
         if(this.props.user.isLoggedIn){
             return(

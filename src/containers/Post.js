@@ -16,10 +16,22 @@ class Post extends Component {
         event.preventDefault();
         const postDetails = {
             title: "Test Post",
-            content: "This is only a test."
+            content: "This is only a test.",
+            postBlogId: "e3920c55-add5-446e-9c52-13bd68ec09c8"
         }
 
         const newTodo = await API.graphql(graphqlOperation(mutations.createPost, {input: postDetails}));
+        console.log(newTodo);
+    }
+
+    async createBlog(event){
+
+        event.preventDefault();
+        const blogDetails = {
+            name: "Test Blog",
+        }
+
+        const newTodo = await API.graphql(graphqlOperation(mutations.createBlog, {input: blogDetails}));
         console.log(newTodo);
     }
 

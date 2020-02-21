@@ -7,6 +7,8 @@ import { Auth } from "aws-amplify";
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions/index.js';
 import history from '../history';
+import Amplify, { Analytics, Storage, API, graphqlOperation } from 'aws-amplify';
+import * as queries from '../graphql/queries';
 
 class LoginForm extends Component {
 
@@ -72,6 +74,8 @@ class LoginForm extends Component {
                 this.toNewPassword();               
             }
             this.props.updateUser(user);
+            const getBlogInput = {owner:this.props.user.payload.username}
+            const blog = await API.graphql(graphqlOperation(queries.getBlog, {input: getBlogInput}));
             localStorage.setItem('token', user.signInUserSession.idToken.jwtToken);
             history.push('/');
         } catch (e) {
@@ -195,5 +199,5 @@ const mapStateToProps = (state)=>{
     return state;
 };
   
-  export default connect (mapStateToProps, actionCreators)(LoginForm);
+export default connect (mapStateToProps, actionCreators)(LoginForm);
 

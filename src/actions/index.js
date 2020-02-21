@@ -18,6 +18,16 @@ export function isLoggedIn() {
     }
 }
 
+export function updateBlog(blog) {
+    return{
+        type:"UPDATE_BLOG",
+        user:{
+            isLoggedIn: true,
+            payload: blog
+        }
+    }
+}
+
 export function logout(){
 
     Auth.signOut()
