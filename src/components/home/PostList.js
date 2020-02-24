@@ -42,7 +42,7 @@ function PostList(props) {
 
     const classes = useStyles();
 
-    const posts = data;
+    const posts = props.posts;
 
     if(posts!== null){
         return(
