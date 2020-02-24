@@ -9,14 +9,12 @@ function Read() {
     let { id } = useParams();
     const post = data[id-1];
     
-
     return(
         <div style={styles.readBox}>
             <h1 style={styles.title}>{post.title}</h1>
             <h3>By: {post.author}</h3>
             <div style={styles.content}>
             <ReactMarkdown source={post.content} />
-
             </div>
         </div>
     )

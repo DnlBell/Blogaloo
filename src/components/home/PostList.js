@@ -38,37 +38,49 @@ const useStyles = makeStyles( theme => ({
     }
   }));
 
-export default function PostList() {
+function PostList(props) {
 
     const classes = useStyles();
 
-    return(
-      <div className={classes.root}>
-          <GridList cellHeight={220} className={classes.gridList} cols={3}>
-            {
-                data.map((item) => 
-                <GridListTile key={item.title} cols={3}>
-                        <CardActionArea
-                            component={Link}
-                            to={`read/${item.id}`}
-                        >
-                        <CardMedia
-                        className={classes.media}
-                        image={DefaultImage}
-                        />
-                        <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                            {item.title}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            By: {item.author}
-                        </Typography>
-                        </CardContent>
-                        </CardActionArea>
-                </GridListTile>
-                )
-            }
-        </GridList>
-      </div>
-    )
+    const posts = data;
+
+    if(posts!== null){
+        return(
+            <div className={classes.root}>
+                <GridList cellHeight={220} className={classes.gridList} cols={3}>
+                  {
+                      posts.map((item) => 
+                      <GridListTile key={item.id} cols={3}>
+                              <CardActionArea
+                                  component={Link}
+                                  to={`read/${item.id}`}
+                              >
+                              <CardMedia
+                              className={classes.media}
+                              image={DefaultImage}
+                              />
+                              <CardContent>
+                              <Typography gutterBottom variant="h5" component="h2">
+                                  {item.title}
+                              </Typography>
+                              <Typography variant="body2" color="textSecondary" component="p">
+                                  By: {item.owner}
+                              </Typography>
+                              </CardContent>
+                              </CardActionArea>
+                      </GridListTile>
+                      )
+                  }
+              </GridList>
+            </div>
+          )
+    }
+    else{
+        return(
+            <div>loading</div>
+        )
+    }
+    
 }
+
+export default PostList

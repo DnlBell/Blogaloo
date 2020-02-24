@@ -20,47 +20,43 @@ export class Login extends Component {
     render() {
         const { values, handleChange } = this.props;
         return (
-            <MuiThemeProvider>
-                <React.Fragment>
-                    <h2>Please Login</h2>
-                    <ErrorMessage message={values.errorMessage} />
-                    <TextField 
-                        hintText="Enter your username"
-                        label="Username"
-                        onChange={handleChange('username')}
-                        defaultValue={values.username}
-                        style={styles.input}
-                    />
-                    <br/>
-                    <TextField 
-                        hintText="Enter your password"
-                        label="Password"
-                        type="password"
-                        onChange={handleChange('password')}
-                        defaultValue={values.password}
-                        style={styles.input}
-                    />
-                    <br/>
-                    <div style={styles.buttonRow}>
-                        <Button
-                            color="secondary"
-                            variant="contained"
-                            style={styles.button}
-                            onClick={this.toRegister}
-                            >
-                            Register
-                        </Button>
-                        <Button 
-                            color="primary"
-                            variant="contained"
-                            style={styles.button}
-                            onClick={this.handleLogin}
-                            >
-                            Submit
-                        </Button>
-                    </div>
-                </React.Fragment>
-            </MuiThemeProvider>
+            <div style={styles.box}>
+                <h3>Please Login</h3>
+                <ErrorMessage message={values.errorMessage} />
+                <TextField 
+                    label="Username"
+                    onChange={handleChange('username')}
+                    defaultValue={values.username}
+                    style={styles.input}
+                />
+                <br/>
+                <TextField 
+                    label="Password"
+                    type="password"
+                    onChange={handleChange('password')}
+                    defaultValue={values.password}
+                    style={styles.input}
+                />
+                <br/>
+                <div style={styles.buttonRow}>
+                    <Button
+                        color="secondary"
+                        variant="contained"
+                        style={styles.button}
+                        onClick={this.toRegister}
+                        >
+                        Register
+                    </Button>
+                    <Button 
+                        color="primary"
+                        variant="contained"
+                        style={styles.button}
+                        onClick={this.handleLogin}
+                        >
+                        Submit
+                    </Button>
+                </div>
+            </div>
         )
     }
 }

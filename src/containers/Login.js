@@ -26,10 +26,10 @@ class LoginForm extends Component {
         }
         this.handleLogin = this.handleLogin.bind(this);
         this.handleNewPassword = this.handleNewPassword.bind(this);
-        this.handleSignUp = this.handleSignUp.bind(this);
+        this.signUp = this.signUp.bind(this);
+        this.validateSignUp = this.validateSignUp.bind(this);
     }
 
-    //move between login to register
     toRegister = () => {
         this.setState({
             step: 2,
@@ -37,7 +37,6 @@ class LoginForm extends Component {
         });
     }
 
-    //move between register and login
     toLogin = () => {
         this.setState({
             step: 1,
@@ -63,7 +62,26 @@ class LoginForm extends Component {
         this.setState({[input] : e.target.value});
     }
 
+    validateSignUp = () => {
+
+        const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+        const emailRegex = new RegExp("/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/");
+
+        if(this.state.password !== this.state.confirmPassword){
+            this.setState({errorMessage: 'Passwords do not match.'});
+            return false;
+        } else if (strongRegex.test(this.state.password)){
+            this.setState({errorMessage: 'Passwords must be 8 characters, contain an upper case and lowercase letter, a number, and a special character.'});
+            return false;
+        } else if (emailRegex.test(this.state.email)){
+            this.setState({errorMessage: 'Email address is not valid.'});
+            return false;
+        }
+        return true;
+    }
+
     async handleLogin() {
+
         try { 
             const user = await Auth.signIn(this.state.username,this.state.password);
             if(user.challengeName === 'NEW_PASSWORD_REQUIRED') {
@@ -102,25 +120,27 @@ class LoginForm extends Component {
         }
     }
 
-    async handleSignUp() {
-        const email = this.state.email;
-        const signUpAttributes = {
-            username: this.state.username,
-            password: this.state.password,
-            attributes: {
-                email:email
+    async signUp() {
+        if(this.validateSignUp()){
+            const email = this.state.email;
+            const signUpAttributes = {
+                username: this.state.username,
+                password: this.state.password,
+                attributes: {
+                    email:email
+                }
             }
-        }
-        try {
-            const newUser = await Auth.signUp(signUpAttributes);
-            this.setState({
-                user:newUser
-            })
-            alert(JSON.stringify(this.state.user));
-        } catch (e) {
-            this.setState({
-                errorMessage: e.message
-            });
+            try {
+                const newUser = await Auth.signUp(signUpAttributes);
+                this.setState({
+                    user:newUser
+                })
+                alert(JSON.stringify(this.state.user));
+            } catch (e) {
+                this.setState({
+                    errorMessage: e.message
+                });
+            }
         }
     }
 
@@ -159,6 +179,7 @@ class LoginForm extends Component {
                             toLogin = {this.toLogin}
                             toAuthenticate = {this.toAuthenticate}
                             handleChange = {this.handleChange}
+                            signUp = {this.signUp}
                             values = {values}
                         />
                     </div>

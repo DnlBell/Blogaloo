@@ -9,7 +9,15 @@ const styles = {
     },
     buttonRow: {
         flexDirection: 'row'
-    }
+    },
+    box: {
+        marginTop:60,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        maxWidth:'95%'
+    },
 };
 
 export default styles;

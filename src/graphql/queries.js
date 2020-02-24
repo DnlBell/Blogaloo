@@ -85,6 +85,21 @@ export const listPosts = `query ListPosts(
   }
 }
 `;
+export const listPosts2 = `query ListPosts(
+  $filter: ModelPostFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      owner
+    }
+    nextToken
+  }
+}
+`;
 export const getComment = `query GetComment($id: ID!) {
   getComment(id: $id) {
     id

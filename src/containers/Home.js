@@ -9,13 +9,18 @@ class Home extends Component {
 
     constructor(props){
         super(props)
+        this.state = {
+            posts: null
+        }
+
         this.listQuery = this.listQuery.bind(this);
     }
 
     async listQuery() {
         console.log('listing posts');
-        const allPosts = await API.graphql(graphqlOperation(queries.listPosts));
-        console.log(JSON.stringify(allPosts));
+        const allPosts = await API.graphql(graphqlOperation(queries.listPosts2));
+        this.setState({posts: allPosts.data.listPosts.items})
+        console.log(JSON.stringify(allPosts.data.listPosts.items));
     };
 
     componentDidMount(){
@@ -24,6 +29,9 @@ class Home extends Component {
 
 
     render(){
+
+        const {posts} = this.state;
+
         if(this.props.user.isLoggedIn){
             return(
                 <div style={styles.HomeBox}>
@@ -31,7 +39,7 @@ class Home extends Component {
                     <h1>Welcome {this.props.user.payload.username} !</h1>
                     <h2>Read posts or submit one of your own!</h2>
                     </div>
-                    <PostList/>
+                    <PostList posts={posts}/>
                 </div>
             );
         } else {
