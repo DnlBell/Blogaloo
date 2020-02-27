@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions/index.js';
 import PostList from '../components/home/PostList';
-import Amplify, { Analytics, Storage, API, graphqlOperation } from 'aws-amplify';
+import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../graphql/queries';
 
 class Home extends Component {
