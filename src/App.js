@@ -8,8 +8,8 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from './containers/Home';
 import Read from './containers/Read';
 import Post from './containers/Post';
-
-
+import { ThemeProvider } from '@material-ui/core/styles';
+import Theme from './theme.js';
 
 class App extends Component{
   
@@ -30,7 +30,7 @@ class App extends Component{
     );
 
     return (
-      <div>
+      <ThemeProvider theme={Theme}>
         <Header/>
         <Switch>
           <PrivateRoute exact path="/" component = {Home}/>
@@ -38,7 +38,8 @@ class App extends Component{
           <PrivateRoute path="/read/:id" component = {Read}/>
           <PrivateRoute path="/post" component = {Post}/>
         </Switch>
-      </div>
+        <Footer/>
+      </ThemeProvider>
     );
   }
 }

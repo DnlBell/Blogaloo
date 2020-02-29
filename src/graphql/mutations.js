@@ -9,6 +9,7 @@ export const createBlog = `mutation CreateBlog($input: CreateBlogInput!) {
       items {
         id
         title
+        date
         content
         owner
       }
@@ -26,6 +27,7 @@ export const updateBlog = `mutation UpdateBlog($input: UpdateBlogInput!) {
       items {
         id
         title
+        date
         content
         owner
       }
@@ -43,6 +45,7 @@ export const deleteBlog = `mutation DeleteBlog($input: DeleteBlogInput!) {
       items {
         id
         title
+        date
         content
         owner
       }
@@ -56,6 +59,7 @@ export const createPost = `mutation CreatePost($input: CreatePostInput!) {
   createPost(input: $input) {
     id
     title
+    date
     content
     blog {
       id
@@ -81,6 +85,7 @@ export const updatePost = `mutation UpdatePost($input: UpdatePostInput!) {
   updatePost(input: $input) {
     id
     title
+    date
     content
     blog {
       id
@@ -106,6 +111,7 @@ export const deletePost = `mutation DeletePost($input: DeletePostInput!) {
   deletePost(input: $input) {
     id
     title
+    date
     content
     blog {
       id
@@ -134,6 +140,7 @@ export const createComment = `mutation CreateComment($input: CreateCommentInput!
     post {
       id
       title
+      date
       content
       blog {
         id
@@ -156,6 +163,7 @@ export const updateComment = `mutation UpdateComment($input: UpdateCommentInput!
     post {
       id
       title
+      date
       content
       blog {
         id
@@ -178,6 +186,7 @@ export const deleteComment = `mutation DeleteComment($input: DeleteCommentInput!
     post {
       id
       title
+      date
       content
       blog {
         id

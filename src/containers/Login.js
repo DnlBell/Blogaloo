@@ -7,8 +7,6 @@ import { Auth } from "aws-amplify";
 import { connect } from 'react-redux';
 import * as actionCreators from '../actions/index.js';
 import history from '../history';
-import Amplify, { Analytics, Storage, API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../graphql/queries';
 
 class LoginForm extends Component {
 
@@ -70,7 +68,7 @@ class LoginForm extends Component {
         if(this.state.password !== this.state.confirmPassword){
             this.setState({errorMessage: 'Passwords do not match.'});
             return false;
-        } else if (strongRegex.test(this.state.password)){
+        } else if (!strongRegex.test(this.state.password)){
             this.setState({errorMessage: 'Passwords must be 8 characters, contain an upper case and lowercase letter, a number, and a special character.'});
             return false;
         } else if (emailRegex.test(this.state.email)){
@@ -92,8 +90,6 @@ class LoginForm extends Component {
                 this.toNewPassword();               
             }
             this.props.updateUser(user);
-            const getBlogInput = {owner:this.props.user.payload.username}
-            const blog = await API.graphql(graphqlOperation(queries.getBlog, {input: getBlogInput}));
             localStorage.setItem('token', user.signInUserSession.idToken.jwtToken);
             history.push('/');
         } catch (e) {
@@ -120,6 +116,10 @@ class LoginForm extends Component {
         }
     }
 
+    async handleVerifyKey() {
+
+    }
+
     async signUp() {
         if(this.validateSignUp()){
             const email = this.state.email;
@@ -135,7 +135,6 @@ class LoginForm extends Component {
                 this.setState({
                     user:newUser
                 })
-                alert(JSON.stringify(this.state.user));
             } catch (e) {
                 this.setState({
                     errorMessage: e.message

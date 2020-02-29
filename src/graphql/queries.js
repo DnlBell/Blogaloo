@@ -9,6 +9,7 @@ export const getBlog = `query GetBlog($id: ID!) {
       items {
         id
         title
+        date
         content
         owner
       }
@@ -40,6 +41,7 @@ export const getPost = `query GetPost($id: ID!) {
   getPost(id: $id) {
     id
     title
+    date
     content
     blog {
       id
@@ -70,6 +72,7 @@ export const listPosts = `query ListPosts(
     items {
       id
       title
+      date
       content
       blog {
         id
@@ -94,6 +97,7 @@ export const listPosts2 = `query ListPosts(
     items {
       id
       title
+      date
       owner
     }
     nextToken
@@ -107,6 +111,7 @@ export const getComment = `query GetComment($id: ID!) {
     post {
       id
       title
+      date
       content
       blog {
         id
@@ -134,6 +139,7 @@ export const listComments = `query ListComments(
       post {
         id
         title
+        date
         content
         owner
       }

@@ -4,7 +4,6 @@ import { useParams } from "react-router";
 import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../graphql/queries';
 
-
 class Read extends Component {
 
     constructor(props){
@@ -34,8 +33,6 @@ class Read extends Component {
 
     render(){
 
-        const { post } = this.state;
-
         if(this.state.title === null){
             return (<div style={styles.readBox}>Loading</div>)
         } 
@@ -44,11 +41,11 @@ class Read extends Component {
                 <h1 style={styles.title}>{this.state.title}</h1>
                 <h3>By: {this.state.owner}</h3>
                 <div style={styles.content}>
-                <ReactMarkdown source={this.state.content} />
+                <ReactMarkdown source={this.state.content} renderers={{image: Image}} />
                 </div>
             </div>
         )
-        }
+    }
 }
 
 const styles = {
@@ -58,15 +55,22 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
+        wordWrap: 'break-word',
     },
     content:{
         width: "95%",
-        maxWidth:800
+        maxWidth:800,
     },
     title:{
         width: "95%",
         textAlign: 'center'
     }
 }
+
+function Image(props) {
+    return <img {...props} style={{maxWidth: '100%'}} />
+}
+
+
 
 export default Read;

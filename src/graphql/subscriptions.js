@@ -9,6 +9,7 @@ export const onCreateBlog = `subscription OnCreateBlog($owner: String!) {
       items {
         id
         title
+        date
         content
         owner
       }
@@ -26,6 +27,7 @@ export const onUpdateBlog = `subscription OnUpdateBlog($owner: String!) {
       items {
         id
         title
+        date
         content
         owner
       }
@@ -43,6 +45,7 @@ export const onDeleteBlog = `subscription OnDeleteBlog($owner: String!) {
       items {
         id
         title
+        date
         content
         owner
       }
@@ -56,6 +59,7 @@ export const onCreatePost = `subscription OnCreatePost($owner: String!) {
   onCreatePost(owner: $owner) {
     id
     title
+    date
     content
     blog {
       id
@@ -81,6 +85,7 @@ export const onUpdatePost = `subscription OnUpdatePost($owner: String!) {
   onUpdatePost(owner: $owner) {
     id
     title
+    date
     content
     blog {
       id
@@ -106,6 +111,7 @@ export const onDeletePost = `subscription OnDeletePost($owner: String!) {
   onDeletePost(owner: $owner) {
     id
     title
+    date
     content
     blog {
       id
@@ -134,6 +140,7 @@ export const onCreateComment = `subscription OnCreateComment($owner: String!) {
     post {
       id
       title
+      date
       content
       blog {
         id
@@ -156,6 +163,7 @@ export const onUpdateComment = `subscription OnUpdateComment($owner: String!) {
     post {
       id
       title
+      date
       content
       blog {
         id
@@ -178,6 +186,7 @@ export const onDeleteComment = `subscription OnDeleteComment($owner: String!) {
     post {
       id
       title
+      date
       content
       blog {
         id

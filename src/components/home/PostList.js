@@ -1,86 +1,71 @@
 import React from 'react';
-import data from '../../data.js'
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import DefaultImage from '../../postDefault.svg';
 import { Link } from "react-router-dom";
-
-const useStyles = makeStyles( theme => ({
-    card: {
-        width: 300,
-    },
-    media: {
-        height: 140,
-    },
-    gridList: {
-        width: "95%",
-        maxWidth: 800
-
-    },
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,
-    },
-    defaultImg: {
-        width:200,
-        height:0
-    }
-  }));
+import ButtonBase from '@material-ui/core/ButtonBase';
+import Avatar from '@material-ui/core/Avatar';
+import Paper from '@material-ui/core/Paper';
 
 function PostList(props) {
-
-    const classes = useStyles();
 
     const posts = props.posts;
 
     if(posts!== null){
         return(
-            <div className={classes.root}>
-                <GridList cellHeight={220} className={classes.gridList} cols={3}>
-                  {
-                      posts.map((item) => 
-                      <GridListTile key={item.id} cols={3}>
-                              <CardActionArea
-                                  component={Link}
-                                  to={`read/${item.id}`}
-                              >
-                              <CardMedia
-                              className={classes.media}
-                              image={DefaultImage}
-                              />
-                              <CardContent>
-                              <Typography gutterBottom variant="h5" component="h2">
-                                  {item.title}
-                              </Typography>
-                              <Typography variant="body2" color="textSecondary" component="p">
-                                  By: {item.owner}
-                              </Typography>
-                              </CardContent>
-                              </CardActionArea>
-                      </GridListTile>
-                      )
-                  }
-              </GridList>
+            <div style={styles.listBox}>   
+            {posts.map((item) => 
+                <ButtonBase
+                    component={Link}
+                    to={`read/${item.id}`}
+                >
+                    <Paper style={styles.postCard}>
+                        <div style={styles.postCard}>
+                        <div style={styles.titleBox}><b>{item.title}</b></div>
+                        <div style={styles.detailsBox}>
+                            <div style={styles.date}>{item.date}</div>
+                            <Avatar>{item.owner.substring(0,3)}</Avatar>
+                        </div>
+                        </div>
+                    </Paper>
+                </ButtonBase>
+            )
+            }
             </div>
-          )
+        )
     }
-    else{
+    else {
         return(
             <div>loading</div>
         )
     }
-    
+}
+
+const styles = {
+    listBox: {
+        display: "flex",
+        width:"95%",
+        maxWidth: 800,
+        flexDirection:"column"
+    },
+    detailsBox: {
+        display: "flex",
+        flexDirection: "row",
+        width:"98%",
+        justifyContent: "flex-end",
+        alignContent:"stretch",
+        marginRight:4
+    },
+    titleBox: {
+       width:"100%",
+       wordWrap: 'break-word',
+       padding:8,
+       fontSize: 35 
+    },
+    postCard: {
+        width:"100%",
+        marginBottom:8
+    },
+    date: {
+        marginRight:8
+    }
 }
 
 export default PostList

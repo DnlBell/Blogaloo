@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Amplify, { API, graphqlOperation } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 import * as mutations from '../graphql/mutations';
 import { Redirect } from 'react-router-dom';
 import SimpleMDE from "react-simplemde-editor";
@@ -33,9 +33,12 @@ class Post extends Component {
 
         if(this.validate()){
             this.setState({postSubmitted : true});
+            const time = new Date().getTime();
+            const date = new Date(time);
             const postDetails = {
                 title: this.state.title,
                 content: this.state.content,
+                date: time
             }
             const newPost = await API.graphql(graphqlOperation(mutations.createPost, {input: postDetails}));
         }
