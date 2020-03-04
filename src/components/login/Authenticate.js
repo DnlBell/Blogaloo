@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import styles from './Styles.js';
+import Paper from '@material-ui/core/Paper';
 
 export class Authenticate extends Component {
     render() {
         const { values, handleChange } = this.props;
         return (
-            <MuiThemeProvider>
-                <React.Fragment>
+            <div style={styles.box}>
+                <Paper style={styles.paper}>
                     <h2>Enter authenticaton key</h2>
                     <br/>
                     <TextField 
@@ -28,8 +28,8 @@ export class Authenticate extends Component {
                         >
                         authenticate
                     </Button>
-                </React.Fragment>
-            </MuiThemeProvider>
+                </Paper>
+            </div>
         )
     }
 }

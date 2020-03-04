@@ -5,19 +5,26 @@ const styles = {
     },
     input : {
         margin: 8,
-        marginTop: 8
+        marginTop: 8,
+        width:'95%',
+        maxWidth:300
     },
     buttonRow: {
         flexDirection: 'row'
     },
     box: {
-        marginTop:60,
+        marginTop:75,
+        maxWidth: 800,
+        width:'95%'
+    },
+    paper:{
+        padding:8,
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        flexDirection: 'column',
-        maxWidth:'95%'
-    },
+        textAlign: 'center'
+    }
 };
 
 export default styles;

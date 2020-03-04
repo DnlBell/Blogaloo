@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import styles from './Styles.js';
 import ErrorMessage from './ErrorMessage.js';
+import Paper from '@material-ui/core/Paper';
 
 export class Login extends Component {
 
@@ -20,7 +21,8 @@ export class Login extends Component {
         const { values, handleChange } = this.props;
         return (
             <div style={styles.box}>
-                <h3>Please Login</h3>
+                <Paper style={styles.paper}>
+                <h3>Welcome! Please Login or register.</h3>
                 <ErrorMessage message={values.errorMessage} />
                 <TextField 
                     label="Username"
@@ -55,6 +57,7 @@ export class Login extends Component {
                         Submit
                     </Button>
                 </div>
+                </Paper>
             </div>
         )
     }

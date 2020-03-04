@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom';
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import ErrorMessage from '../components/layout/ErrorMessage';
+import Paper from '@material-ui/core/Paper';
 
 
 class Post extends Component {
@@ -78,7 +79,7 @@ class Post extends Component {
             return(
                 <div style={styles.PostBox}>
                     <h1>New Post</h1>
-                    <div style={styles.InputBox}>
+                    <Paper style={styles.InputBox}>
                         <TextField
                             label="Title"
                             fullWidth
@@ -98,7 +99,7 @@ class Post extends Component {
                             Post
                         </Button>
                     </div>
-                    </div>
+                    </Paper>
                 </div>
             )
         }
@@ -118,7 +119,8 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         width:"95%",
-        maxWidth:800
+        maxWidth:800,
+        padding: 12
     },
     ButtonBar: {
         display: 'flex',

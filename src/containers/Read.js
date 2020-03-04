@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { useParams } from "react-router";
 import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../graphql/queries';
+import Paper from '@material-ui/core/Paper';
 
 class Read extends Component {
 
@@ -38,11 +38,11 @@ class Read extends Component {
         } 
         return(
             <div style={styles.readBox}>
+                <Paper style={styles.content}>
                 <h1 style={styles.title}>{this.state.title}</h1>
+                <ReactMarkdown source={this.state.content} renderers={{image: Image, code:Code}} />
                 <h3>By: {this.state.owner}</h3>
-                <div style={styles.content}>
-                <ReactMarkdown source={this.state.content} renderers={{image: Image}} />
-                </div>
+                </Paper>
             </div>
         )
     }
@@ -50,7 +50,7 @@ class Read extends Component {
 
 const styles = {
     readBox: {
-        marginTop:60,
+        marginTop:80,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -58,12 +58,16 @@ const styles = {
         wordWrap: 'break-word',
     },
     content:{
-        width: "95%",
+        width: "90%",
         maxWidth:800,
+        padding:12,
+        margin:4
     },
     title:{
         width: "95%",
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: 50,
+        background: "primary"
     }
 }
 
@@ -71,6 +75,17 @@ function Image(props) {
     return <img {...props} style={{maxWidth: '100%'}} />
 }
 
+function Code(props) {
+    return ( 
+    <div style={{width: '100%', overflowX:'scroll', maxHeight:'50%'}}>
+    <pre>
+        <code >
+            {props.value}
+        </code>
+    </pre>
+    </div>
+    )
+}
 
 
 export default Read;
