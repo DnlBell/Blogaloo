@@ -60,6 +60,59 @@ class LoginForm extends Component {
         this.setState({[input] : e.target.value});
     }
 
+    async handleLogin() {
+
+        try { 
+            const user = await Auth.signIn(this.state.username,this.state.password);
+            if(user.challengeName === 'NEW_PASSWORD_REQUIRED') {
+                this.setState({
+                    password: '',
+                    user: user
+                });
+                this.toNewPassword();               
+            }
+            console.log(user.challengeName);
+            this.props.updateUser(user);
+            localStorage.setItem('token', user.signInUserSession.idToken.jwtToken);
+            history.push('/');
+        } catch (e) {
+            if( e.message === "User is not confirmed.") {
+                this.toAuthenticate();
+            }
+            this.setState({
+                errorMessage: e.message
+            });
+        }
+    }
+
+    async handleNewPassword() {
+        try {
+            const loggedUser = await Auth.completeNewPassword(
+                this.state.user,
+                this.state.password,
+            )
+            this.setState({
+                user: loggedUser
+            })
+        } catch (e) {
+            this.setState({
+                errorMessage: e.message
+            });
+        }
+    }
+
+    handleVerifyKey = () => {
+
+        const {username, authKey} = this.state
+
+        try {
+            Auth.confirmSignUp(username, authKey);
+            this.handleLogin();
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     validateSignUp = () => {
 
         const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
@@ -78,48 +131,6 @@ class LoginForm extends Component {
         return true;
     }
 
-    async handleLogin() {
-
-        try { 
-            const user = await Auth.signIn(this.state.username,this.state.password);
-            if(user.challengeName === 'NEW_PASSWORD_REQUIRED') {
-                this.setState({
-                    password: '',
-                    user: user
-                });
-                this.toNewPassword();               
-            }
-            this.props.updateUser(user);
-            localStorage.setItem('token', user.signInUserSession.idToken.jwtToken);
-            history.push('/');
-        } catch (e) {
-            this.setState({
-                errorMessage: e.message
-            })
-        }
-    }
-
-    async handleNewPassword() {
-        try {
-            const loggedUser = await Auth.completeNewPassword(
-                this.state.user,
-                this.state.password,
-            )
-            this.setState({
-                user: loggedUser
-            })
-            alert(JSON.stringify(loggedUser));
-        } catch (e) {
-            this.setState({
-                errorMessage: e.message
-            });
-        }
-    }
-
-    async handleVerifyKey() {
-
-    }
-
     async signUp() {
         if(this.validateSignUp()){
             const email = this.state.email;
@@ -135,6 +146,7 @@ class LoginForm extends Component {
                 this.setState({
                     user:newUser
                 })
+                this.toAuthenticate();
             } catch (e) {
                 this.setState({
                     errorMessage: e.message
@@ -189,6 +201,7 @@ class LoginForm extends Component {
                         <Authenticate 
                             handleChange = {this.handleChange}
                             values = {values}
+                            handleVerifyKey = {this.handleVerifyKey}
                         />
                     </div>
                     )

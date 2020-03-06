@@ -5,6 +5,12 @@ import styles from './Styles.js';
 import Paper from '@material-ui/core/Paper';
 
 export class Authenticate extends Component {
+
+    handleAuthenticate = e => {
+        e.preventDefault();
+        this.props.handleVerifyKey();
+    }
+
     render() {
         const { values, handleChange } = this.props;
         return (
@@ -24,8 +30,8 @@ export class Authenticate extends Component {
                         color="secondary"
                         variant="contained"
                         style={styles.button}
-                        onClick={this.toLogin}
-                        >
+                        onClick={this.handleAuthenticate}
+                    >
                         authenticate
                     </Button>
                 </Paper>

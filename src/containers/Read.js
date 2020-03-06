@@ -77,7 +77,7 @@ function Image(props) {
 
 function Code(props) {
     return ( 
-    <div style={{width: '100%', overflowX:'scroll', maxHeight:'50%'}}>
+    <div style={{width: '100%', overflow:'scroll', maxHeight:600}}>
     <pre>
         <code >
             {props.value}

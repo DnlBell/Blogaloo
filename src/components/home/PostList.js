@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Avatar from '@material-ui/core/Avatar';
 import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
 
 function PostList(props) {
 
     const posts = props.posts;
 
     if(posts!== null){
+
         return(
             <div style={styles.listBox}>   
             {posts.map((item) => 
@@ -17,13 +19,19 @@ function PostList(props) {
                     to={`read/${item.id}`}
                 >
                     <Paper style={styles.postCard}>
-                        <div style={styles.postCard}>
-                        <div style={styles.titleBox}><b>{item.title}</b></div>
+                        <Box style={styles.postCard}>
+                        <Box bgcolor="secondary.light" style={styles.titleBox}>
+                            <b>{item.title}</b>
+                        </Box>
                         <div style={styles.detailsBox}>
-                            <div style={styles.date}>{item.date}</div>
-                            <Avatar>{item.owner.substring(0,3)}</Avatar>
+                            <div style={styles.date}>
+                            {
+                                getDateString(parseInt(item.date))
+                            }
+                            </div>
+                            <Avatar style={styles.avatar}>{item.owner.substring(0,3)}</Avatar>
                         </div>
-                        </div>
+                        </Box>
                     </Paper>
                 </ButtonBase>
             )
@@ -36,6 +44,11 @@ function PostList(props) {
             <div>loading</div>
         )
     }
+}
+
+function getDateString(dateInMs) {
+    const date = new Date(dateInMs);
+    return date.toString();
 }
 
 const styles = {
@@ -54,17 +67,21 @@ const styles = {
         marginRight:4
     },
     titleBox: {
-       width:"100%",
        wordWrap: 'break-word',
        padding:8,
-       fontSize: 35 
+       fontSize: 30,
+       borderRadius: 5
     },
     postCard: {
         width:"100%",
         marginBottom:8
     },
     date: {
-        marginRight:8
+        marginRight:8,
+        padding:4
+    },
+    avatar: {
+        marginTop:4
     }
 }
 

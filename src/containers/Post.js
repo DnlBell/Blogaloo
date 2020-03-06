@@ -35,7 +35,6 @@ class Post extends Component {
         if(this.validate()){
             this.setState({postSubmitted : true});
             const time = new Date().getTime();
-            const date = new Date(time);
             const postDetails = {
                 title: this.state.title,
                 content: this.state.content,
@@ -104,7 +103,6 @@ class Post extends Component {
             )
         }
     }
-
 }
 
 const styles = {
@@ -120,7 +118,7 @@ const styles = {
         flexDirection: 'column',
         width:"95%",
         maxWidth:800,
-        padding: 12
+        padding: 8
     },
     ButtonBar: {
         display: 'flex',
